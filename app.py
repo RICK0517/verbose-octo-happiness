@@ -21,7 +21,13 @@ tokenizer, model = load_model()
 
 # 訓練模型
 def train_model(training_text):
-    inputs = tokenizer(training_text, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
+    # 檢查 training_text 是否為空或格式不正確
+    if not training_text or not isinstance(training_text, str):
+        st.error("訓練數據為空或格式不正確！")
+        return
+
+    # 將文本轉換為 tokenized 格式
+    inputs = tokenizer(training_text, return_tensors="pt", max_length=1024, truncation=True, padding=True)
     
     class TextDataset(torch.utils.data.Dataset):
         def __init__(self, encodings):
