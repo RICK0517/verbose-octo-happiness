@@ -27,7 +27,7 @@ def train_model(training_text):
         return
 
     # 將文本轉換為 tokenized 格式
-    inputs = tokenizer(training_text, return_tensors="pt", max_length=1024, truncation=True, padding=True)
+    inputs = tokenizer(training_text, return_tensors="pt", max_length=1024, truncation=True, padding="max_length")
     
     class TextDataset(torch.utils.data.Dataset):
         def __init__(self, encodings):
